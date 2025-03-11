@@ -1,0 +1,93 @@
+/* Chat container styles */
+#chat-container {
+    max-width: 800px; /* Setting a max-width for better control */
+    margin: 40px auto; /* Center the chat container */
+    border-radius: 12px; /* Rounded corners */
+    padding: 20px;
+    background-color: #f9fafb; /* Light background */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: flex;
+    flex-direction: column;
+    height: 570px; /* Fixed height for the chat container */
+}
+
+/* Message area */
+#messages {
+    flex-grow: 1; /* Takes up all available space */
+    overflow-y: auto; /* Allows scrolling if the content overflows */
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #ffffff; /* White background for message area */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-height: 350px; /* Set a max-height to limit the message area */
+}
+
+/* User message styling */
+.user-message {
+    background-color: #e3f2fd;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border-left: 5px solid #2196F3; /* Blue left border */
+}
+
+/* Bot message styling */
+.bot-message {
+    background-color: #f5f5f5;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border-left: 5px solid #4CAF50; /* Green left border */
+}
+
+/* Input area styles */
+#input-area {
+    display: flex;
+    gap: 15px; /* Space between input and button */
+    justify-content: space-between;
+    padding-top: 10px; /* Space between messages and input */
+}
+
+/* Input field styles */
+#userInput {
+    flex: 1; /* Makes the input field take available space */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus effect for input field */
+#userInput:focus {
+    border-color: #2196F3;
+    box-shadow: 0 0 8px rgba(33, 150, 243, 0.5);
+    outline: none;
+}
+
+/* Button styles */
+button {
+    padding: 12px 24px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #1976D2;
+    transform: translateY(-2px);
+}
+
+/* Disclaimer (optional) */
+.disclaimer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+}

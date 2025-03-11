@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gemini Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <style>
+        /* #chat-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        #messages {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+            font-style: italic;
+        }
+        .user-message {
+            color: blue;
+            margin: 5px 0;
+        }
+        .bot-message {
+            color: green;
+            margin: 5px 0;
+        } */
+    </style> -->
+</head>
+<body>
+    <div id="chat-container">
+        <h1>Stock and Market Analysis ChatBot</h1>
+        <div id="messages"></div>
+        <div id="input-area">
+            <input type="text" id="userInput" placeholder="Type your message..." style="width: 80%;">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const messages = document.getElementById('messages');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Add user message
+            messages.innerHTML += `<div class="user-message">You: ${message}</div>`;
+            input.value = '';
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    messages.innerHTML += `<div class="error">Error: ${data.error}</div>`;
+                    if (data.details) {
+                        messages.innerHTML += `<div class="error">Details: ${data.details}</div>`;
+                    }
+                } else {
+                    messages.innerHTML += `<div class="bot-message">Bot: ${data.reply}</div>`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messages.innerHTML += `<div class="error">Error connecting to server: ${error.message}</div>`;
+            }
+
+            // Scroll to bottom
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        // Add Enter key support
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Test connection on load
+        window.onload = async function() {
+            try {
+                const response = await fetch('/api/test');
+                const data = await response.json();
+                console.log('Server test:', data);
+            } catch (error) {
+                console.error('Server test failed:', error);
+            }
+        };
+    </script>
+</body>
+</html>
